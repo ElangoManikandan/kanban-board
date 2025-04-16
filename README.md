@@ -21,5 +21,5 @@ npm install tailwindcss @tailwindcss/vite
 https://www.youtube.com/watch?v=sHnG8tIYMB4
 
 3.**Run the server**
-npm install
-npm run dev
+-npm install
+-npm run dev
