@@ -13,7 +13,7 @@ A simple and responsive **Kanban Board** built with **Vite**, **React**, and **T
 ## ⚙️ Getting Started
 
 1. **Clone the repository**
-git clone https://github.com/your-username/kanban-board.git
+git clone https://github.com/elangomanikandan/kanban-board.git
 cd kanban-board
 npm install tailwindcss @tailwindcss/vite
 
@@ -21,5 +21,5 @@ npm install tailwindcss @tailwindcss/vite
 https://www.youtube.com/watch?v=sHnG8tIYMB4
 
 ## 3.**Run the server**
--npm install
--npm run dev
+- npm install
+- npm run dev
