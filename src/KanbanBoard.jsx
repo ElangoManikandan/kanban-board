@@ -234,7 +234,10 @@ const moveTask = (item, targetColumnId) => {
         ],
       }}
     >
-     <div className="p-6 min-h-screen bg-gradient-to-br from-blue-300 via-sky-200 to-white">
+ <div
+  className="p-6 min-h-screen bg-cover bg-center"
+  style={{ backgroundImage: "url('/bg.jpg')" }}
+>
         <h1 className="text-4xl font-bold text-center mb-6 text-gray-800 drop-shadow">
          Kanban Board
         </h1>
