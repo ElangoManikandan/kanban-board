@@ -220,7 +220,7 @@ const moveTask = (item, targetColumnId) => {
   
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="p-6 min-h-screen bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100">
+      <div className="col-span-1 sm:col-span-3 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg mt-2 shadow disabled:opacity-50 disabled:cursor-not-allowed>
         <h1 className="text-4xl font-bold text-center mb-6 text-gray-800 drop-shadow">
          Kanban Board
         </h1>
