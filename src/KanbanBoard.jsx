@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useDrag, useDrop } from "react-dnd";
 import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import { MultiBackend } from "react-dnd-multi-backend";
+import { HTML5toTouch } from "./dnd/HTML5toTouch";
+
 
 const columnLimits = {
   "in-progress": 3,
@@ -202,7 +204,7 @@ export default function KanbanBoard() {
   };
   
   return (
-    <DndProvider backend={HTML5Backend}>
+<DndProvider backend={MultiBackend} options={HTML5toTouch}>
      <div className="p-6 min-h-screen bg-gradient-to-br from-blue-300 via-sky-200 to-white">
         <h1 className="text-4xl font-bold text-center mb-6 text-gray-800 drop-shadow">
          Kanban Board
