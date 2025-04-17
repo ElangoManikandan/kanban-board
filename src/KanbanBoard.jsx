@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useDrag, useDrop } from "react-dnd";
 import { DndProvider } from "react-dnd";
-import { MultiBackend } from "react-dnd-multi-backend";
-import { HTML5Backend } from "react-dnd-html5-backend"; // Importing HTML5Backend
-import { TouchBackend } from "react-dnd-touch-backend";  // Correct import
-
-
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 const columnLimits = {
   "in-progress": 3,
@@ -178,73 +174,36 @@ export default function KanbanBoard() {
     });
   };
 
-const moveTask = (item, targetColumnId) => {
-  const { task, index, columnId } = item;
-
-  setColumns((prev) => {
-    const sourceColumn = [...prev[columnId]];
-    const destColumn = [...prev[targetColumnId]];
-
-    // 🚫 Limit logic
-    if (
-      columnLimits[targetColumnId] &&
-      destColumn.length >= columnLimits[targetColumnId]
-    ) {
-      alert(`Limit reached: ${targetColumnId} can have only ${columnLimits[targetColumnId]} tasks.`);
-      return prev;
-    }
-
-    sourceColumn.splice(index, 1);
-    const movedTask = { ...task, status: targetColumnId };
-    destColumn.push(movedTask);
-
-    console.log(
-      JSON.stringify(
-        {
-          id: movedTask.id,
-          title: movedTask.title,
-          description: movedTask.description,
-          status: movedTask.status,
-          priority: movedTask.priority,
-          verified: movedTask.verified,
-        },
-        null,
-        2
-      )
-    );
-
-    return {
-      ...prev,
-      [columnId]: sourceColumn,
-      [targetColumnId]: destColumn,
-    };
-  });
-};
-
-
+  const moveTask = (item, targetColumnId) => {
+    const { task, index, columnId } = item;
   
-  const getBackend = () => {
-    // Check if touch device
-    return window.innerWidth <= 768 ? TouchBackend : HTML5Backend;
+    setColumns((prev) => {
+      const sourceColumn = [...prev[columnId]];
+      const destColumn = [...prev[targetColumnId]];
+  
+      sourceColumn.splice(index, 1);
+      const movedTask = { ...task, status: targetColumnId };
+      destColumn.push(movedTask);
+      console.log(JSON.stringify({
+        id: movedTask.id,
+        title: movedTask.title,
+        description: movedTask.description,
+        status: movedTask.status,
+        priority: movedTask.priority,
+        verified: movedTask.verified,
+      }, null, 2));
+  
+      return {
+        ...prev,
+        [columnId]: sourceColumn,
+        [targetColumnId]: destColumn,
+      };
+    });
   };
-
+  
   return (
-    <DndProvider
-      backend={MultiBackend}
-      options={{
-        backends: [
-          {
-            id: "html5",
-            backend: HTML5Backend, // Use HTML5Backend for desktop
-          },
-          {
-            id: "touch",
-            backend: TouchBackend, // Use TouchBackend for mobile
-          },
-        ],
-      }}
-    >
-     <div className="p-6 min-h-screen bg-gradient-to-br from-blue-300 via-sky-200 to-white">
+    <DndProvider backend={HTML5Backend}>
+      <div className="p-6 min-h-screen bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100">
         <h1 className="text-4xl font-bold text-center mb-6 text-gray-800 drop-shadow">
          Kanban Board
         </h1>
@@ -272,13 +231,12 @@ const moveTask = (item, targetColumnId) => {
             <option value="high">High</option>
           </select>
           <button
-  onClick={handleAddTask}
-  disabled={!newTask.title.trim() || !newTask.description.trim()}
-  className="col-span-1 sm:col-span-3 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg mt-2 shadow disabled:opacity-50 disabled:cursor-not-allowed"
->
-  ➕ Add Task
-</button>
-
+            onClick={handleAddTask}
+            disabled={!newTask.title.trim() || !newTask.description.trim()}
+            className="col-span-1 sm:col-span-3 bg-indigo-500 hover:bg-indigo-600 text-white py-2 rounded-lg mt-2 shadow disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            ➕ Add Task
+          </button>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
