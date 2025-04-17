@@ -174,32 +174,49 @@ export default function KanbanBoard() {
     });
   };
 
-  const moveTask = (item, targetColumnId) => {
-    const { task, index, columnId } = item;
-  
-    setColumns((prev) => {
-      const sourceColumn = [...prev[columnId]];
-      const destColumn = [...prev[targetColumnId]];
-  
-      sourceColumn.splice(index, 1);
-      const movedTask = { ...task, status: targetColumnId };
-      destColumn.push(movedTask);
-      console.log(JSON.stringify({
-        id: movedTask.id,
-        title: movedTask.title,
-        description: movedTask.description,
-        status: movedTask.status,
-        priority: movedTask.priority,
-        verified: movedTask.verified,
-      }, null, 2));
-  
-      return {
-        ...prev,
-        [columnId]: sourceColumn,
-        [targetColumnId]: destColumn,
-      };
-    });
-  };
+const moveTask = (item, targetColumnId) => {
+  const { task, index, columnId } = item;
+
+  setColumns((prev) => {
+    const sourceColumn = [...prev[columnId]];
+    const destColumn = [...prev[targetColumnId]];
+
+    // 🚫 Limit logic
+    if (
+      columnLimits[targetColumnId] &&
+      destColumn.length >= columnLimits[targetColumnId]
+    ) {
+      alert(`Limit reached: ${targetColumnId} can have only ${columnLimits[targetColumnId]} tasks.`);
+      return prev;
+    }
+
+    sourceColumn.splice(index, 1);
+    const movedTask = { ...task, status: targetColumnId };
+    destColumn.push(movedTask);
+
+    console.log(
+      JSON.stringify(
+        {
+          id: movedTask.id,
+          title: movedTask.title,
+          description: movedTask.description,
+          status: movedTask.status,
+          priority: movedTask.priority,
+          verified: movedTask.verified,
+        },
+        null,
+        2
+      )
+    );
+
+    return {
+      ...prev,
+      [columnId]: sourceColumn,
+      [targetColumnId]: destColumn,
+    };
+  });
+};
+
   
   return (
     <DndProvider backend={HTML5Backend}>
