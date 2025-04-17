@@ -247,18 +247,18 @@ const moveTask = (item, targetColumnId) => {
             placeholder="Title"
             value={newTask.title}
             onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-            className="p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-300"
+            className="bg-white p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-300"
           />
           <input
             placeholder="Description"
             value={newTask.description}
             onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
-            className="p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-300"
+            className="bg-white p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-300"
           />
           <select
             value={newTask.priority}
             onChange={(e) => setNewTask({ ...newTask, priority: e.target.value })}
-            className="p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-300"
+            className="bg-white p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-300"
           >
             <option value="low">Low</option>
             <option value="medium">Medium</option>
