@@ -185,24 +185,33 @@ const moveTask = (item, targetColumnId) => {
     const sourceColumn = [...prev[columnId]];
     const destColumn = [...prev[targetColumnId]];
 
-    // Check column limit
-    if (columnLimits[targetColumnId] && destColumn.length >= columnLimits[targetColumnId]) {
-      alert(`Cannot move task. '${columnNames[targetColumnId]}' column limit reached.`);
-      return prev; // Don't update state if limit reached
+    // 🚫 Limit logic
+    if (
+      columnLimits[targetColumnId] &&
+      destColumn.length >= columnLimits[targetColumnId]
+    ) {
+      alert(`Limit reached: ${targetColumnId} can have only ${columnLimits[targetColumnId]} tasks.`);
+      return prev;
     }
 
     sourceColumn.splice(index, 1);
     const movedTask = { ...task, status: targetColumnId };
     destColumn.push(movedTask);
-    
-    console.log(JSON.stringify({
-      id: movedTask.id,
-      title: movedTask.title,
-      description: movedTask.description,
-      status: movedTask.status,
-      priority: movedTask.priority,
-      verified: movedTask.verified,
-    }, null, 2));
+
+    console.log(
+      JSON.stringify(
+        {
+          id: movedTask.id,
+          title: movedTask.title,
+          description: movedTask.description,
+          status: movedTask.status,
+          priority: movedTask.priority,
+          verified: movedTask.verified,
+        },
+        null,
+        2
+      )
+    );
 
     return {
       ...prev,
@@ -211,6 +220,7 @@ const moveTask = (item, targetColumnId) => {
     };
   });
 };
+
 
   
   const getBackend = () => {
