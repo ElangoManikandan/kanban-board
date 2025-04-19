@@ -4,7 +4,7 @@ import { useDrag, useDrop } from "react-dnd";
 import { DndProvider } from "react-dnd";
 import { MultiBackend } from "react-dnd-multi-backend";
 import { HTML5Backend } from "react-dnd-html5-backend"; // Importing HTML5Backend
-import { TouchBackend } from "react-dnd-touch-backend";  // Correct import
+import { TouchBackend } from "react-dnd-touch-backend"; 
 
 
 
@@ -136,7 +136,7 @@ export default function KanbanBoard() {
       ...prev,
       "to-do": [...prev["to-do"], task],
     }));
-    console.log(task); // Sample JSON output
+    console.log(task); 
     setNewTask({ title: "", description: "", priority: "low" });
   };
 
@@ -225,11 +225,11 @@ const moveTask = (item, targetColumnId) => {
         backends: [
           {
             id: "html5",
-            backend: HTML5Backend, // Use HTML5Backend for desktop
+            backend: HTML5Backend,
           },
           {
             id: "touch",
-            backend: TouchBackend, // Use TouchBackend for mobile
+            backend: TouchBackend,
           },
         ],
       }}
