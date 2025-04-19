@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useDrag, useDrop } from "react-dnd";
 import { DndProvider } from "react-dnd";
 import { MultiBackend } from "react-dnd-multi-backend";
-import { HTML5Backend } from "react-dnd-html5-backend"; // Importing HTML5Backend
+import { HTML5Backend } from "react-dnd-html5-backend";
 import { TouchBackend } from "react-dnd-touch-backend"; 
 
 
