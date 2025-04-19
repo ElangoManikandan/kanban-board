@@ -188,7 +188,7 @@ const moveTask = (item, targetColumnId) => {
     // Check column limit
     if (columnLimits[targetColumnId] && destColumn.length >= columnLimits[targetColumnId]) {
       alert(`Cannot move task. '${columnNames[targetColumnId]}' column limit reached.`);
-      return prev; // Don't update state if limit reached
+      return prev; 
     }
 
     sourceColumn.splice(index, 1);
