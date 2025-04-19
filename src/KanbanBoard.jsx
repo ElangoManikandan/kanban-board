@@ -213,8 +213,7 @@ const moveTask = (item, targetColumnId) => {
 };
 
   
-  const getBackend = () => {
-    // Check if touch device
+  const getBackend = () => {
     return window.innerWidth <= 768 ? TouchBackend : HTML5Backend;
   };
 
